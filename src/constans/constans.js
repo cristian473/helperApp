@@ -1,0 +1,1 @@
+export const GET_DATA_CARDS = 'GET_DATA_CARDS'
