@@ -13,6 +13,7 @@ import store from './src/store'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator  } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -22,11 +23,37 @@ export default function App() {
       
       <NavigationContainer>
       
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Helpers" component={Helpers} />
-          <Tab.Screen name="Mensajes" component={Messages} />
-          <Tab.Screen name="Configuraciones" component={SettingsUser} />
+        <Tab.Navigator >
+          <Tab.Screen name="Home" component={Home} 
+            options = {{
+              tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons name="home" color={color} size={26} />
+              )
+
+          }}/>
+          <Tab.Screen name="Helpers" component={Helpers} 
+            options= {{
+              tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons name = 'charity' color = {color} size = {26}/>
+              )
+            }}
+          />
+          <Tab.Screen name="Mensajes" component={Messages}
+            options= {{
+              tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons name = 'forum' color = {color} size = {26}/>
+              )
+            }}
+
+          />
+          <Tab.Screen name="Configuraciones" component={SettingsUser} 
+            options= {{
+              tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons name = 'account' color = {color} size = {26}/>
+              )
+            }}
+
+          />
         </Tab.Navigator>
         
       </NavigationContainer>

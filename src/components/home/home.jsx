@@ -1,13 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-// import Body from '../Body/body.js'
-// import ButtonBar from '../buttonBar'
+import {getData} from '../../actions/dataCards'
+import {useDispatch, useSelector} from 'react-redux'
 import TopBar from '../TopBar'
+import Post from './post'
+import { ScrollView } from 'react-native-gesture-handler';
+
 
 
 const Home = props => {
-  
+
+    const dispatch = useDispatch();
+    useEffect(()=>dispatch(getData()),[])
+    // useEffect(()=>dispatch(getImages()),[])
+    const helpers = useSelector(store => store.helpers)
+    console.log(helpers)
     return (
     //   <SafeAreaView style={styles.container}>
     //     <View style={styles.TopBar}>
@@ -24,7 +32,14 @@ const Home = props => {
           <TopBar title='Inicio' />
         </View>
         <View style={styles.containerHome}>
-          <Text>Home</Text>
+          <ScrollView style={styles.scroll}>
+            <View style={styles.contanerPosts}>
+                {helpers.map((hel, index) => (
+                  <Post key={index} name = {hel.superhero} body = {hel.first_appearance}/>
+                ))}
+            </View>
+          </ScrollView>
+          
         </View>
       </View>
 
@@ -51,7 +66,10 @@ const styles = StyleSheet.create({
     flex: 1.1,
 
   },
-  bottonBar:{
-    flex: 1
+  scroll:{
+    width:'100%',
+  },
+  contanerPosts:{
+    alignItems: 'center'
   }
 });
